@@ -1,0 +1,28 @@
+# Dependency directories
+node_modules/
+package-lock.json
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.object-separation/
+
+# Build & output artifacts
+work/
+dist/
+out/
+motion/work/
+motion/dist/
+motion/out/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & temp files
+*.log
+.tmp/
