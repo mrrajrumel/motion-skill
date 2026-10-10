@@ -1,38 +1,37 @@
-# Motion Skill: AI B-Roll Generator & Video Object Separation (SAM 2) for Agentic IDEs 🎬✨
+# Motion Skill: AI Motion Graphics, B-Roll & SAM 2 Video Rotoscoping for Claude 🎬✨
 
 [![Created by Rumel Ahmed](https://img.shields.io/badge/Creator-Rumel%20Ahmed-FF5A1F?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mrrajrumel)
 [![GitHub Repository](https://img.shields.io/badge/Repository-mrrajrumel%2Fmotion--skill-0B0B0B?style=for-the-badge&logo=github)](https://github.com/mrrajrumel/motion-skill)
-[![Agent Skills](https://img.shields.io/badge/Agentic%20IDEs-Antigravity%20%7C%20Claude-7C3AED?style=for-the-badge&logo=anthropic&logoColor=white)](https://github.com/mrrajrumel/motion-skill)
+[![Claude Skill](https://img.shields.io/badge/Claude-Claude.ai%20%7C%20Claude%20Code-7C3AED?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-> **Motion** is an AI agent skill that turns a talking-head video into **motion graphics B-roll** timed to the speaker's words, generates **standalone 60fps motion graphic explainer videos**, and **isolates any subject** (person, product, hand) from a video background using **Meta's SAM 2** — all running locally on your machine.
+> **Motion** is an official-standard Claude agent skill that turns talking-head videos into **motion graphics B-roll** timed to spoken words, creates **standalone 60fps motion graphic explainer videos**, and **isolates subjects** (people, products, hands) from video backgrounds using **Meta's SAM 2** — running 100% locally on your machine.
 
-Works with agentic coding tools such as **Google Antigravity**, **Claude Code**, **Claude.ai** (Web Projects & Artifacts), and any agent that can read a `SKILL.md` file and run shell commands.
+Designed specifically for **Claude.ai** (Web Projects & Artifacts), **Claude Code** (Anthropic's terminal CLI agent), and **Claude Desktop**.
 
 Created by **[Rumel Ahmed](https://github.com/mrrajrumel)** · [https://github.com/mrrajrumel/motion-skill](https://github.com/mrrajrumel/motion-skill)
 
 ---
 
-**Keywords:** AI B-roll generator, motion graphics automation, standalone explainer video, video object segmentation, SAM 2 video masking, rotoscoping with AI, automatic video cutaways, animated overlays, talking-head video editing, YouTube video editing automation, Antigravity skills, Claude.ai skills, Claude Code skills, agent skills, SKILL.md.
+**Keywords:** Claude skills, Claude.ai motion graphics, Claude Code skills, AI B-roll generator, motion graphics automation, standalone explainer video, video object segmentation, SAM 2 video masking, rotoscoping with AI, automatic video cutaways, animated overlays, talking-head video editing, YouTube video editing automation, SKILL.md.
 
 ---
 
 ## Table of Contents
 
 - [What can you do with the Motion skill?](#what-can-you-do-with-the-motion-skill)
-- [Workflow 1: AI B-Roll & Motion Graphics](#workflow-1-ai-b-roll--motion-graphics)
+- [Workflow 1: AI Motion Graphics & B-Roll](#workflow-1-ai-motion-graphics--b-roll)
 - [Workflow 2: Video Object Separation (Rotoscoping with SAM 2)](#workflow-2-video-object-separation-rotoscoping-with-sam-2)
 - [Requirements](#requirements)
-- [Installation Guide](#installation-guide)
-  - [Installation in Google Antigravity](#installation-in-google-antigravity)
-  - [Installation in Claude.ai (Web Projects)](#installation-in-claudeai-web-projects)
-  - [Installation in Claude Code (Terminal CLI)](#installation-in-claude-code-terminal-cli)
-- [How to command the skill (Prompt Examples)](#how-to-command-the-skill-prompt-examples)
+- [How to Install on Claude](#how-to-install-on-claude)
+  - [Option A: Direct 1-Click Upload to Claude.ai (Web Projects)](#option-a-direct-1-click-upload-to-claudeai-web-projects)
+  - [Option B: Install into Claude Code (Terminal CLI)](#option-b-install-into-claude-code-terminal-cli)
+- [How to command Claude (Prompt & Slash Commands)](#how-to-command-claude-prompt--slash-commands)
 - [Project structure](#project-structure)
 - [Output files](#output-files)
 - [FAQ](#faq)
 - [License & credits](#license--credits)
-- [Suggested GitHub repository settings (for SEO)](#suggested-github-repository-settings-for-seo)
+- [GitHub repository settings (for SEO)](#github-repository-settings-for-seo)
 
 ---
 
@@ -47,20 +46,20 @@ Created by **[Rumel Ahmed](https://github.com/mrrajrumel)** · [https://github.c
 
 ---
 
-## Workflow 1: AI B-Roll & Motion Graphics
+## Workflow 1: AI Motion Graphics & B-Roll
 
-Generate **continuous, one-shape motion-graphic clips** for a creator's video. Each clip is a single shape that never cuts: it morphs its size, corners and colour between states while its content swaps with a short blur. A cursor drives the changes with real clicks and drags, and every change lands on a spoken word.
+Generate **continuous, one-shape motion-graphic clips** with Claude. Each clip is a single shape that never cuts: it morphs its size, corners and colour between states while its content swaps with a short blur. A cursor drives the changes with real clicks and drags, and every change lands on a spoken word or beat.
 
 ### Two Supported Modes:
-1. **Video B-Roll Mode**: Synchronized to an existing talking-head video (`source.mp4`) and transcript (`transcript.srt`). Produces full-frame cutaways or transparent ProRes 4444 (`.mov`) overlay panels for Picture-in-Picture layouts.
-2. **Standalone Motion Video Mode**: Generates a complete 60fps motion graphic explainer (product highlights, kinetic UI cards, terminal demos) directly from your prompt or script without needing raw footage!
+1. **Standalone Motion Video Mode**: Generates a complete 60fps motion graphic explainer (product highlights, kinetic UI cards, terminal demos) directly from your prompt or script without needing raw video footage!
+2. **Video B-Roll Mode**: Synchronized to an existing talking-head video (`source.mp4`) and transcript (`transcript.srt`). Produces full-frame cutaways or transparent ProRes 4444 (`.mov`) overlay panels for Picture-in-Picture layouts.
 
 ### How it works:
 1. **Setup** – Checks Node, Python 3 and ffmpeg; installs Playwright + Chromium locally into `motion/node_modules`.
-2. **Interview** – Asks for your video, transcript (SRT/VTT), density (light / medium / heavy) and look (default palette or your brand).
+2. **Interview** – Claude asks for your video/script, transcript (SRT/VTT), density (light / medium / heavy) and look (default palette or your brand).
 3. **Inspect footage** – Reads resolution, fps and layout (full-frame speaker or picture-in-picture).
-4. **Plan** – Shows a clip-by-clip table (timing, covered line, treatment, reason). **Nothing is built until you approve it.**
-5. **Build** – Writes each clip as self-contained HTML following `reference/engine-api.md`.
+4. **Plan** – Claude presents a clip-by-clip table (timing, covered line, treatment, reason). **Nothing is built until you approve it.**
+5. **Build** – Claude writes each clip as self-contained HTML following `reference/engine-api.md`.
 6. **Check** – Renders still frames on key words with `engine/beats.js` and fixes layout problems.
 7. **Render** – Frame-by-frame 4x subframe render with motion blur to MP4 (or ProRes 4444 `.mov` with alpha for transparent panels).
 8. **Deliver** – Clips, `TIMING.md`, `preview.mp4`, `viewer.html`, `compare.html`.
@@ -97,59 +96,75 @@ The skill scans your hardware and picks the right model automatically:
 
 ---
 
-## Installation Guide
+## How to Install on Claude
 
-### Installation in Google Antigravity
+```mermaid
+graph TD
+    A["Download motion-skill Repo / ZIP"] --> B["Create Claude.ai Project"]
+    B --> C["Upload SKILL.md & workflows/ to Project Knowledge"]
+    C --> D["Paste Master Prompt in Project Instructions"]
+    D --> E["Type Command: /motion or /broll in Chat"]
+    E --> F["Preview Live in Claude Artifacts"]
+    F --> G["Render 60fps Video with Local Engine"]
+```
 
-1. Clone this repository so the folder is named `motion` and contains `SKILL.md` at its top level:
-   ```bash
-   # Clone the repository
-   git clone https://github.com/mrrajrumel/motion-skill.git motion
-   ```
+### Option A: Direct 1-Click Upload to Claude.ai (Web Projects)
 
-2. Place the folder in your Antigravity skills directory:
-   - **Workspace (this project only):**
-     ```bash
-     mkdir -p .agent/skills
-     cp -r motion .agent/skills/motion
-     ```
-   - **Global (all projects):** Copy into your Antigravity global configuration skills directory:
-     - Windows: `C:\Users\<user>\.gemini\config\skills\motion\`
-     - macOS/Linux: `~/.gemini/config/skills/motion/`
-3. Refresh or start your agent session so Antigravity loads the skill.
-4. Put your video (and transcript) in your project folder, or prompt the agent to create standalone motion graphics.
+Anyone can directly upload this skill to **Claude.ai** in under 60 seconds:
+
+#### 1. Download or Package the Skill Bundle
+Clone the repository or generate the 1-click Claude upload bundle:
+```bash
+git clone https://github.com/mrrajrumel/motion-skill.git
+cd motion-skill
+python scripts/package_skill.py
+```
+This produces `motion-skill-claude.zip`.
+
+#### 2. Create a Project on Claude.ai
+1. Go to [Claude.ai](https://claude.ai) and sign in.
+2. In the left navigation, click **Projects** → **Create Project**.
+3. Name your project: `Motion Graphics Studio`.
+
+#### 3. Upload Project Knowledge
+Under **Project Knowledge**, click **Add Content** and upload:
+- `motion-skill-claude.zip` *(or upload `SKILL.md`, `workflows/`, and `reference/engine-api.md` directly)*.
+
+#### 4. Add Project Custom Instructions
+In the Project's **Custom Instructions** box, paste:
+
+```markdown
+You are a senior Motion Graphics Director and Developer powered by the Motion Skill toolkit created by Rumel Ahmed (https://github.com/mrrajrumel).
+
+Capabilities:
+1. STANDALONE MOTION VIDEOS: Creating 60fps explainer videos, SaaS demos, and UI animations from a script, prompt, or outline.
+2. VIDEO B-ROLL: Creating speech-timed cutaways and transparent PiP overlay panels for talking-head videos.
+3. LOCAL OBJECT SEPARATION: Isolating subjects with SAM 2.
+
+Direct Commands Supported:
+- /motion [topic or script]: Create a standalone motion graphic video.
+- /broll [transcript or video]: Generate synchronized B-roll cutaways.
+- /panel [details]: Design a transparent floating overlay panel for PiP.
+- /separate [clip]: Isolate subject with SAM 2.
+
+Follow the motion principles strictly:
+- One continuous shape that never cuts (morphs size, corners, and color).
+- Realistic cursor with human easing and clicks driving all changes.
+- Content swaps with subtle blur-in/blur-out timing.
+- Geist & Geist Mono typography, clean aesthetic (#E9E7E2 canvas, #0B0B0B ink, #FF5A1F accent).
+- Provide live, interactive HTML preview fragments via Claude Artifacts.
+```
+
+#### 5. Chat & Preview in Claude Artifacts
+Now simply start a chat in your project and give commands like `/motion` or `/broll`! Claude will generate interactive HTML fragments inside **Claude Artifacts** so you can preview animations directly inside your browser.
 
 ---
 
-### Installation in Claude.ai (Web Projects)
+### Option B: Install into Claude Code (Terminal CLI)
 
-You can upload this skill directly into [Claude.ai](https://claude.ai) Projects:
+If you use Anthropic's **Claude Code** terminal agent:
 
-1. **Package the Skill Bundle**:
-   ```bash
-   python scripts/package_skill.py
-   ```
-   This generates `motion-skill-claude.zip`.
-2. **Create a Claude.ai Project**:
-   - Go to [Claude.ai](https://claude.ai) → **Projects** → **Create Project**.
-   - Name it: `Motion Graphics Studio`.
-3. **Upload Knowledge**:
-   - Upload `motion-skill-claude.zip` (or upload `SKILL.md`, `workflows/`, and `reference/engine-api.md`).
-4. **Set Custom Instructions**:
-   - Paste the following prompt into the Project Instructions box:
-     ```text
-     You are a Motion Graphics Producer using the Motion Skill created by Rumel Ahmed (https://github.com/mrrajrumel).
-     Follow SKILL.md strictly. You support standalone motion graphics (/motion), B-roll cutaways (/broll), transparent PiP panels (/panel), and SAM 2 rotoscoping (/separate). Produce pure single-shape morphing clips using Geist typography and warm studio palettes. Output interactive HTML artifacts for live browser preview.
-     ```
-5. **Use Commands in Chat**:
-   - Type `/motion` or `/broll` with your idea or transcript! Claude renders live interactive previews inside Claude Artifacts.
-
----
-
-### Installation in Claude Code (Terminal CLI)
-
-Install as a native Claude agent skill:
-
+#### 1. Install as a Claude Skill
 ```bash
 # Global installation:
 git clone https://github.com/mrrajrumel/motion-skill.git ~/.claude/skills/motion
@@ -158,7 +173,7 @@ git clone https://github.com/mrrajrumel/motion-skill.git ~/.claude/skills/motion
 git clone https://github.com/mrrajrumel/motion-skill.git .claude/skills/motion
 ```
 
-Run one-time setup:
+#### 2. Run Setup Once
 ```bash
 # macOS / Linux:
 bash ~/.claude/skills/motion/scripts/setup.sh ./motion
@@ -167,15 +182,19 @@ bash ~/.claude/skills/motion/scripts/setup.sh ./motion
 powershell -ExecutionPolicy Bypass -File ~/.claude/skills/motion/scripts/setup.ps1 ./motion
 ```
 
-Then run `claude` and command the skill directly in the terminal!
+#### 3. Run Claude Code
+```bash
+claude
+```
+Claude Code autonomously handles video inspection, timeline planning, HTML compilation, contact sheet checks, and final video rendering!
 
 ---
 
-## How to command the skill (prompt examples)
+## How to command Claude (Prompt & Slash Commands)
 
-You do not run scripts manually. Describe what you want in plain English or use slash commands, and the agent follows the skill:
+You do not run complex scripts manually. Describe what you want in plain English or use slash commands, and Claude follows the skill:
 
-### Standalone Motion Videos
+### Standalone Motion Videos (`/motion`)
 
 ```
 /motion Create a 20-second 60fps standalone motion graphic video explaining our new developer API:
@@ -185,13 +204,13 @@ You do not run scripts manually. Describe what you want in plain English or use 
 ```
 
 ```
-Use the motion skill to create a standalone product changelog video for version 2.0. No source video needed. Use 16:9 1920x1080 resolution.
+/motion Create a standalone product changelog video for version 2.0. No source video needed. Use 16:9 1920x1080 resolution.
 ```
 
-### B-roll and motion graphics
+### Video B-Roll & Cutaways (`/broll`)
 
 ```
-Use the motion skill to make B-roll for my video at ./videos/intro.mp4.
+/broll Make motion-graphic B-roll for my video at ./videos/intro.mp4.
 The transcript is ./videos/intro.srt. Use medium density and my brand
 colours: background #101010, accent #00C2FF.
 ```
@@ -201,35 +220,37 @@ colours: background #101010, accent #00C2FF.
 only the strongest moments. Keep the first 5 seconds on my face.
 ```
 
-```
-Use motion to create a transparent panel overlay for the picture-in-picture
-section of my video, from 0:20 to 0:45.
-```
-
-### Object separation
+### Transparent Overlay Panels (`/panel`)
 
 ```
-Use the motion skill to separate the product in clip.mp4 from the background.
+/panel Create a transparent floating overlay panel for the picture-in-picture
+section of my video, from 0:20 to 0:45. Show an animated status island and metrics chart.
+```
+
+### SAM 2 Object Separation (`/separate`)
+
+```
+/separate Isolate the product in clip.mp4 from the background.
 Frames 0 to 89. The product is in the centre of the frame.
 ```
 
 ```
-Isolate the hand holding the phone in demo.mp4 and give me the masks.
+/separate Isolate the hand holding the phone in demo.mp4 and export per-frame masks.
 ```
 
-### Combined
+### Combined Workflows
 
 ```
-Separate the bottle from the background in ad.mp4, then build B-roll
-around it using the saved masks.
+Separate the bottle from the background in ad.mp4 with /separate, then build B-roll
+around it using /broll with the saved masks.
 ```
 
-### Tips for better results:
+### Tips for Best Results:
 - Always provide a **transcript (SRT or VTT)** for B-roll. Word timing drives the animation.
 - State the **density** (light, medium, heavy) and your **brand colours** upfront to skip questions.
-- Tell the agent which lines to **keep on your face** or which **real numbers** to show.
-- For object separation, say what to **include and exclude** (for example, "leave out my fingers").
-- Review the **plan table** before approving. This is the best moment to change the edit.
+- Tell Claude which lines to **keep on your face** or which **real numbers** to show.
+- For object separation, say what to **include and exclude** (e.g. "leave out my fingers").
+- Review Claude's **plan table** before approving. This is the best moment to refine the edit.
 
 ---
 
@@ -237,8 +258,8 @@ around it using the saved masks.
 
 ```text
 motion/
-├── SKILL.md                 # Entry point: routes the request to a workflow
-├── README.md                # Full documentation & setup guide
+├── SKILL.md                 # Entry point: Claude skill descriptor & command router
+├── README.md                # Full documentation & Claude setup guide
 ├── LICENSE                  # MIT License
 ├── workflows/
 │   ├── broll.md             # Motion graphics B-roll & standalone video workflow
@@ -266,29 +287,29 @@ All deliverables are written to `motion/out/`:
 | `viewer.html` | Step through the clips one by one in your browser |
 | `compare.html` | Original vs preview synced comparison (side-by-side, stacked, or wipe) |
 
-> `preview.mp4` is for review. For the final edit, drop the clips into your own video editor to adjust timing, add transitions and mix audio.
+> `preview.mp4` is for review. For the final edit, drop the clips into your own video editor (Premiere, Resolve, Final Cut, CapCut) to adjust timing, add transitions and mix audio.
 
 ---
 
 ## FAQ
 
 **What is the Motion skill?**  
-An agent skill (`SKILL.md` plus scripts) that automates motion-graphics videos, B-roll for talking-head videos, and AI-powered video object separation.
+An agent skill (`SKILL.md` plus engine scripts) that allows Claude to automate motion-graphics videos, speech-timed B-roll, and AI-powered video object separation.
 
-**Can I create standalone motion videos without a source video?**  
-Yes! Use the standalone motion video mode (`/motion`) to generate complete 60fps explainer and promotional videos from any script or prompt.
+**Can I create standalone motion videos without raw footage?**  
+Yes! Use the standalone motion video command (`/motion`) to generate complete 60fps explainer and promotional videos from any script or prompt.
 
 **Does it upload my video anywhere?**  
 No. B-roll rendering and SAM 2 separation both run 100% locally on your machine.
 
 **Which editors can I use the clips in?**  
-Any editor that imports MP4 or ProRes `.mov`: Premiere Pro, DaVinci Resolve, Final Cut Pro, CapCut and others.
+Any editor that imports MP4 or ProRes `.mov`: Premiere Pro, DaVinci Resolve, Final Cut Pro, CapCut, and others.
 
 **Do I need a GPU?**  
 Not for B-roll or motion graphics. For object separation a GPU is much faster, but CPU works with the small model.
 
 **Can I use my own brand colours and fonts?**  
-Yes. Share colours, a logo or screenshots and the skill uses them instead of the defaults.
+Yes. Share colours, a logo, or screenshots in Claude chat and the skill uses them instead of the defaults.
 
 **Does it invent statistics?**  
 No. It uses placeholders and labels from your transcript unless you provide real figures.
@@ -308,8 +329,8 @@ Delete the `.object-separation` virtual environment folder and the cached models
 
 ---
 
-### Suggested GitHub repository settings (for SEO)
+### GitHub repository settings (for SEO)
 
 - **Repository name:** `motion-skill`
-- **Description:** `AI agent skill: motion graphics B-roll generator and SAM 2 video object separation. Works with Google Antigravity & Claude.`
-- **Topics:** `ai-agent`, `agent-skills`, `antigravity`, `claude-code`, `claude-ai`, `b-roll`, `motion-graphics`, `video-editing`, `sam2`, `segment-anything`, `rotoscoping`, `video-segmentation`, `youtube`, `automation`, `playwright`, `ffmpeg`
+- **Description:** `AI agent skill for Claude: motion graphics B-roll generator and SAM 2 video object separation. Works with Claude.ai & Claude Code.`
+- **Topics:** `claude`, `claude-ai`, `claude-code`, `claude-skills`, `ai-agent`, `agent-skills`, `b-roll`, `motion-graphics`, `video-editing`, `sam2`, `segment-anything`, `rotoscoping`, `video-segmentation`, `youtube`, `automation`, `playwright`, `ffmpeg`
