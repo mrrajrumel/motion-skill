@@ -5,226 +5,272 @@
 [![Claude Skill](https://img.shields.io/badge/Claude-Agent%20Skill-7C3AED?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-An intelligent, production-grade motion graphics video toolkit designed for **Claude.ai** and **Claude Code**. 
+An intelligent, production-grade motion graphics video toolkit designed for **Claude.ai** (Web Projects & Artifacts) and **Claude Code** (Anthropic's CLI Agent).
 
-Turn talking-head videos and transcripts into continuous, single-shape motion-graphic B-roll timed to the speaker's words, and perform 100% local subject rotoscoping/object separation with SAM 2.
+Create **Standalone Motion Graphic Explainer Videos** and **Talking-Head Video B-Roll** (cutaways, overlays, animated panels) synchronized to speech, plus perform **100% Local AI Object Separation** with SAM 2.
 
-Created by **[Rumel Ahmed](https://github.com/mrrajrumel)**.
-
----
-
-## 🌟 Key Highlights
-
-- **One Shape That Never Cuts**: Instead of jarring transitions, a single shape morphs size, corner radius, and color from state to state while content swaps with a soft motion blur.
-- **Natural Cursor Dynamics**: Realistic cursor movement with easing curves, clicks, and drags that directly drives interface changes.
-- **Spoken Word Sync**: Every beat, morph, and indicator lands precisely on spoken words from your SRT transcript.
-- **Cinematic Motion Blur**: 4 subframes per frame across a 180° shutter rendered via Playwright and blended with `ffmpeg tmix`.
-- **ProRes 4444 Alpha Panels**: Render transparent overlay panels (`.mov`) that float in the empty space beside the speaker (e.g., Picture-in-Picture).
-- **Local SAM 2 Object Separation**: Isolate products, people, or hands using Meta's Segment Anything Model 2 locally on your GPU/CPU with zero cloud uploads.
+> **Created by [Rumel Ahmed](https://github.com/mrrajrumel)** · [https://github.com/mrrajrumel/motion-skill](https://github.com/mrrajrumel/motion-skill)
 
 ---
 
-## 📂 Repository Structure
+## ⚡ What You Can Create
+
+### 1. 🎞️ Standalone Motion Graphic Videos
+Create complete, cinematic 60fps explainer and promotional videos from scratch—**no existing video footage needed!**
+- **SaaS & Product Demos**: Feature walkthroughs, app tours, release changelogs.
+- **Tech & Concept Explainers**: Architecture diagrams, workflow pipelines, code execution.
+- **Social Media Reels / Shorts**: Dynamic 9:16 vertical motion cards and data visualizations.
+- **Kinetic UI Animations**: Buttons, sliders, switches, drag-and-drop actions, live terminal sessions.
+
+### 2. 🎙️ Video B-Roll & Speech-Timed Cutaways
+Elevate talking-head videos into engaging, polished YouTube/course productions:
+- **Full-Frame Cutaways**: Single-shape morphing scenes that explain what the speaker describes, timed to the exact syllable.
+- **Transparent Overlay Panels**: Floating ProRes 4444 (`.mov`) panels placed in empty space (e.g. Picture-in-Picture).
+- **Zero Awkward Cuts**: Continuous morphs where cards fluidly transform their dimensions, corners, and colors.
+
+### 3. ✂️ Local AI Subject Separation (SAM 2)
+Isolate subjects (people, products, hands, hardware) directly on your local GPU/CPU:
+- 100% private: no video data uploaded to third-party clouds.
+- Exports green-screen preview videos and per-frame lossless PNG alpha masks.
+
+---
+
+## 🚀 How to Directly Upload & Use on Claude.ai
+
+Anyone can directly upload this skill to **Claude.ai** in under 60 seconds and start issuing commands!
+
+```mermaid
+graph TD
+    A["Download motion-skill Repo / ZIP"] --> B["Create Claude.ai Project"]
+    B --> C["Upload SKILL.md & workflows/ to Project Knowledge"]
+    C --> D["Paste Master Prompt in Project Instructions"]
+    D --> E["Type Command: /motion or /broll in Chat"]
+    E --> F["Preview Live in Claude Artifacts"]
+    F --> G["Render 60fps Motion Video with Local Engine"]
+```
+
+### Step 1: Download or Package the Skill
+Clone the repository or generate the 1-click Claude upload bundle:
+
+```bash
+# Option A: Clone the repo
+git clone https://github.com/mrrajrumel/motion-skill.git
+
+# Option B: Or package into a 1-click ZIP bundle
+cd motion-skill
+python scripts/package_skill.py
+```
+This generates `motion-skill-claude.zip` containing all instructions, workflows, and engine references.
+
+---
+
+### Step 2: Upload to Claude.ai Projects
+
+1. Open [Claude.ai](https://claude.ai) and sign in.
+2. In the left navigation, click **Projects** → **Create Project**.
+3. Name your project: `Motion Video Studio` (or `Motion Skill`).
+4. Under **Project Knowledge**, click **Add Content** and upload:
+   - `SKILL.md`
+   - `workflows/broll.md`
+   - `workflows/object-separation.md`
+   - `reference/engine-api.md`
+   - *(Or upload the `motion-skill-claude.zip` bundle directly)*
+
+---
+
+### Step 3: Add the Master System Instructions
+
+In your Claude Project's **Custom Instructions** box, paste the following prompt:
+
+```markdown
+You are a senior Motion Graphics Director and Developer powered by the Motion Skill toolkit created by Rumel Ahmed (https://github.com/mrrajrumel).
+
+You support both:
+1. STANDALONE MOTION VIDEOS: Creating 60fps explainer videos, SaaS demos, and UI animations from a script, prompt, or outline.
+2. VIDEO B-ROLL: Creating speech-timed cutaways and transparent PiP overlay panels for talking-head videos.
+3. LOCAL OBJECT SEPARATION: Isolating subjects with SAM 2.
+
+Direct Commands Supported:
+- /motion [topic or script]: Create a standalone motion graphic video.
+- /broll [transcript or video]: Generate synchronized B-roll cutaways.
+- /panel [details]: Design a transparent floating overlay panel for PiP.
+- /separate [clip]: Isolate subject with SAM 2.
+
+Follow the motion principles strictly:
+- One continuous shape that never cuts (morphs size, corners, and color).
+- Realistic cursor with human easing and clicks driving all changes.
+- Content swaps with subtle blur-in/blur-out timing.
+- Geist & Geist Mono typography, clean aesthetic (#E9E7E2 canvas, #0B0B0B ink, #FF5A1F accent).
+- Provide live, interactive HTML preview fragments via Claude Artifacts.
+```
+
+---
+
+### Step 4: Use Direct Commands in Chat! 💬
+
+Now simply start a chat inside your Claude Project and give direct commands:
+
+#### Example 1: Standalone Motion Video Command
+```text
+/motion Make a 25-second motion graphic video explaining our new AI code search engine:
+- Intro: A search pill bar expands into an interactive terminal
+- Feature 1: Cursor types "search repo" and semantic cards pop up
+- Feature 2: High-speed spring slider filtering by relevance
+- Outro: Call-to-action button with a smooth click pulse
+```
+
+#### Example 2: Video B-Roll Command
+```text
+/broll Here is my video transcript for our new release video:
+"0:02 We built the fastest database ever.
+ 0:08 You can query 1 billion rows in 3 milliseconds.
+ 0:15 And deployment takes just one click."
+Give me 3 motion-graphic cutaways timed to these beats.
+```
+
+#### Example 3: Transparent PiP Panel Command
+```text
+/panel I have talking-head footage in the right corner.
+Make a transparent panel on the left showing an animated live server status island that morphs into a real-time analytics chart.
+```
+
+#### Example 4: Local Object Separation Command
+```text
+/separate Isolate the iPhone held by the speaker in work/source.mp4 from frame 0 to 120 so I can animate graphics floating behind it.
+```
+
+---
+
+## 💻 Alternative: Using with Claude Code (Terminal CLI)
+
+If you are using **Claude Code** (Anthropic's terminal CLI agent), you can run the entire pipeline end-to-end autonomously:
+
+### 1. Install as a Claude Skill
+```bash
+# Global installation:
+git clone https://github.com/mrrajrumel/motion-skill.git ~/.claude/skills/motion
+
+# Or local workspace installation:
+git clone https://github.com/mrrajrumel/motion-skill.git .claude/skills/motion
+```
+
+### 2. Run One-Time Setup
+```bash
+# macOS / Linux:
+bash ~/.claude/skills/motion/scripts/setup.sh ./motion
+
+# Windows PowerShell:
+powershell -ExecutionPolicy Bypass -File ~/.claude/skills/motion/scripts/setup.ps1 ./motion
+```
+
+### 3. Run Claude Code
+```bash
+claude
+```
+Then ask:
+> *"Run /motion to create an animated SaaS explainer for our product"* or  
+> *"Run /broll for source.mp4 and transcript.srt"*
+
+Claude Code will automatically inspect the video, plan the timeline, compile the HTML fragments, run contact sheet checks, and render final 60fps MP4/MOV videos with motion blur!
+
+---
+
+## 🎨 Motion Design Architecture
+
+```text
+               ┌──────────────────────────────────────────────┐
+               │              M.scene Canvas                  │
+               │          (#E9E7E2 Warm Studio Gray)          │
+               │                                              │
+               │   ┌──────────────────────────────────────┐   │
+               │   │              #shape                  │   │
+               │   │      (Single Continuous Morph)       │   │
+               │   │                                      │   │
+               │   │   State A  ──M.MORPH──►  State B     │   │
+               │   │   [Pill]                 [Card]      │   │
+               │   └──────────────────────────────────────┘   │
+               │                      ▲                       │
+               │                      │ Driven by             │
+               │                 ┌────┴─────┐                 │
+               │                 │ #cursor  │                 │
+               │                 │ (clicks) │                 │
+               │                 └──────────┘                 │
+               └──────────────────────────────────────────────┘
+```
+
+- **Spring-Driven Physics**: Closed-form analytical spring equations (`M.track`, `M.MORPH`, `M.FAST`, `M.SLOW`).
+- **Subframe Motion Blur**: Every frame renders 4 subframes across a 180° shutter blended with `ffmpeg tmix`.
+- **Pure Time Functions**: `seek(t)` draws any exact microsecond with zero state drift or CSS animation desync.
+- **Geist Design Tokens**: Base64-embedded Geist & Geist Mono fonts for crisp, modern typography.
+
+---
+
+## 🗂️ Project Layout
 
 ```text
 motion-skill/
-├── SKILL.md                     # Claude agent skill definition & workflow router
-├── README.md                    # Documentation & Claude.ai setup guide
+├── SKILL.md                     # Skill descriptor & command router
+├── README.md                    # Documentation & Claude.ai usage guide
+├── LICENSE                      # MIT License
 ├── workflows/
-│   ├── broll.md                 # Step-by-step motion graphics B-roll workflow
+│   ├── broll.md                 # Motion graphics & B-roll workflow
 │   └── object-separation.md     # Local SAM 2 video rotoscoping workflow
 ├── engine/
-│   ├── base.css                 # Base stylesheet with embedded Geist fonts
-│   ├── motion.js                # Core spring physics and motion engine (window.M)
-│   ├── build.py                 # Fragment compiler (clip fragment → standalone HTML)
-│   ├── render.js                # Playwright + ffmpeg 4x subframe video renderer
-│   ├── beats.js                 # Contact sheet generator for keyframe validation
-│   └── fonts/                   # Geist & Geist Mono embedded fonts (OFL)
+│   ├── base.css                 # Base styles & typography
+│   ├── motion.js                # Core spring physics engine (window.M)
+│   ├── build.py                 # Fragment to standalone HTML compiler
+│   ├── render.js                # 4x subframe motion blur video renderer
+│   ├── beats.js                 # Keyframe still contact sheet extractor
+│   └── fonts/                   # Embedded Geist & Geist Mono fonts
 ├── scripts/
-│   ├── setup.sh                 # Unix/macOS one-line environment setup
-│   ├── setup.ps1                # Windows PowerShell environment setup
-│   ├── inspect_video.py         # Video inspector (PiP detection, aspect ratio, fps)
-│   ├── words.py                 # SRT transcript parser with word-level timestamps
+│   ├── setup.sh                 # Linux/macOS setup script
+│   ├── setup.ps1                # Windows PowerShell setup script
+│   ├── package_skill.py         # 1-click Claude.ai ZIP packaging tool
+│   ├── inspect_video.py         # Video resolution, fps & PiP detector
+│   ├── words.py                 # SRT transcript word timestamp parser
 │   ├── composite.py             # Automatic preview composite generator
-│   └── make_pages.py            # Generates interactive viewer.html and compare.html
+│   └── make_pages.py            # Generates viewer.html and compare.html
 ├── templates/
 │   ├── viewer.html              # Interactive clip-by-clip review player
-│   └── compare.html             # Synced side-by-side / wipe / stacked comparison
+│   └── compare.html             # Synced side-by-side comparison player
 ├── examples/
-│   └── opus-aoe2/               # Complete reference project (6 clips + plan.json)
+│   └── opus-aoe2/               # 6 production-ready clips + plan.json
 └── reference/
-    └── engine-api.md            # Complete window.M engine API reference
+    └── engine-api.md            # Complete window.M API reference
 ```
 
 ---
 
-## 🚀 How to Use on Claude.ai
+## ⚙️ Local Rendering Command Reference
 
-You can use this skill on **Claude.ai** (Web Projects) or via **Claude Code** (Anthropic's terminal CLI agent).
-
----
-
-### Method 1: Using Claude.ai Projects (Web Interface)
-
-Claude Projects allows you to supply custom knowledge and instructions to Claude so it acts as your personal motion designer.
-
-#### Step 1: Create a Project
-1. Log in to [Claude.ai](https://claude.ai).
-2. Click **Projects** in the left sidebar and click **Create Project**.
-3. Name it: `Motion Graphics Producer` (or `Video B-Roll Skill`).
-
-#### Step 2: Add Project Knowledge
-Upload the following files from this repository into the **Project Knowledge** section:
-- `SKILL.md`
-- `workflows/broll.md`
-- `workflows/object-separation.md`
-- `reference/engine-api.md`
-- `examples/opus-aoe2/plan.json` *(optional, for quality reference)*
-
-#### Step 3: Set Custom Instructions
-Paste the following into the **Project Instructions** box:
-
-```text
-You are an expert motion graphics director and developer using the Motion Skill toolkit created by Rumel Ahmed (https://github.com/mrrajrumel/motion-skill).
-
-Follow the instructions in SKILL.md and workflows/broll.md strictly:
-1. When given a transcript or video description, conduct a concise one-round interview (density, brand look, cutaway vs panel).
-2. Propose a clip plan table with timestamps, lines covered, and shape interactions before writing code.
-3. Once approved, write complete HTML clip fragments following reference/engine-api.md and output them as downloadable Claude Artifacts.
-4. Adhere strictly to the design principles: one shape that never cuts, spring physics, Geist typography, warm gray palette (#E9E7E2), no generic transitions, and realistic cursor timing.
-```
-
-#### Step 4: Chat & Generate Motion Graphics
-1. Start a new chat inside your project.
-2. Provide your transcript (e.g., an `.srt` file or pasted text with timestamps) and describe your video.
-3. Claude will:
-   - Interview you about visual density and brand palette.
-   - Propose an approved **Clip Plan Table**.
-   - Generate the self-contained HTML fragments for each clip inside Claude Artifacts.
-4. Download the generated `.html` fragments and place them in your local `motion/clips/` directory.
-
-#### Step 5: Render Locally on Your Computer
-Because browser sandboxes cannot execute `ffmpeg` or `playwright` directly, run the rendering step locally on your machine:
+After Claude generates your clip fragments in `motion/clips/`:
 
 ```bash
-# 1. Compile fragments into self-contained HTML
+# 1. Compile HTML fragments
 python engine/build.py motion/dist motion/clips/*.html
 
-# 2. Render each clip to 60fps MP4 with motion blur
+# 2. Check stills on key beats
+NODE_PATH=./motion/node_modules node engine/beats.js motion/dist/01-clip.html motion/work/sheet.png 0.5 1.2 2.4
+
+# 3. Render 60fps MP4 (or ProRes 4444 .mov for alpha panels)
 NODE_PATH=./motion/node_modules node engine/render.js motion/dist/01-clip.html motion/out/01-clip.mp4 60
 
-# 3. Create the review composite and comparison pages
+# 4. Generate composite and review pages
 python scripts/composite.py motion/plan.json motion/out/preview.mp4
 python scripts/make_pages.py motion/plan.json motion/out/preview.mp4
 ```
 
-Open `motion/out/compare.html` in any browser to review the synced side-by-side comparison with your original footage!
-
 ---
 
-### Method 2: Using Claude Code (Terminal CLI)
-
-If you use **Claude Code**, Claude can execute the Python and Node rendering scripts directly:
-
-#### Step 1: Install the Skill
-Clone this repository into your Claude skills directory:
-
-```bash
-# Global skills directory:
-git clone https://github.com/mrrajrumel/motion-skill.git ~/.claude/skills/motion
-
-# Or as a project-specific skill inside your video folder:
-git clone https://github.com/mrrajrumel/motion-skill.git .claude/skills/motion
-```
-
-#### Step 2: Run Setup in Your Project
-In your video project root:
-
-```bash
-# On macOS / Linux:
-bash ~/.claude/skills/motion/scripts/setup.sh ./motion
-
-# On Windows PowerShell:
-powershell -ExecutionPolicy Bypass -File ~/.claude/skills/motion/scripts/setup.ps1 ./motion
-```
-
-#### Step 3: Run Claude Code
-Place your video in `motion/work/source.mp4` and your transcript in `transcript.srt`. Then run:
-
-```bash
-claude
-```
-
-Prompt Claude:
-> *"I have a talking-head video at `motion/work/source.mp4` and transcript at `transcript.srt`. Use the motion skill to create motion graphics B-roll for it."*
-
-Claude will autonomously inspect the footage, present the plan, code the clips, inspect contact sheets, render the MP4s/MOVs, and generate the review pages.
-
----
-
-## 🎨 The Two Core Workflows
-
-### 1. Motion B-Roll (`workflows/broll.md`)
-
-Turn talking-head footage into rich, animated visual demonstrations:
-
-| Step | Action | Command / Output |
-|---|---|---|
-| **1. Setup** | Install Playwright & Chromium | `setup.sh` or `setup.ps1` |
-| **2. Interview** | Determine density & branding | Ask user for palette, fonts, key points |
-| **3. Inspection** | Detect PiP / speaker box & timings | `python scripts/inspect_video.py` |
-| **4. Planning** | Map lines to UI interactions | Output approval table |
-| **5. Building** | Write single-shape morph HTML | `python engine/build.py` |
-| **6. Verification** | Contact sheet of still frames | `node engine/beats.js` |
-| **7. Rendering** | Frame-by-frame 4x subframe blur | `node engine/render.js` (MP4 / ProRes MOV) |
-| **8. Delivery** | Cut preview, synced comparison | `composite.py` + `make_pages.py` |
-
-#### Visual Design Tokens:
-- **Canvas**: `#E9E7E2` (warm studio gray)
-- **Ink**: `#0B0B0B` (crisp dark contrast)
-- **Accent**: `#FF5A1F` (energetic safety orange)
-- **Panel Shapes**: `#F4F2EE` (for dark footage overlays)
-- **Typography**: Geist (UI text) & Geist Mono (code, data, counters)
-
----
-
-### 2. Local Object Separation (`workflows/object-separation.md`)
-
-Isolate a subject (person, product, phone, hands) using **Meta SAM 2** without uploading any video to external servers:
-
-1. **Hardware Auto-Detection**:
-   - NVIDIA GPU (12GB+): `facebook/sam2.1-hiera-large`
-   - Apple Silicon / NVIDIA (<12GB): `facebook/sam2.1-hiera-base-plus`
-   - CPU-only fallback: `facebook/sam2.1-hiera-tiny`
-2. **Coordinate Grid Selection**: Generates an initial frame overlay with coordinate grids so you or Claude can pick click points (`PTS = [[x, y]]`, `LBL = [1, 0]`).
-3. **Chunked Memory Propagation**: Tracks subjects in 60-frame chunks for rock-solid stability even on modest hardware.
-4. **Deliverables**:
-   - `work/separated.mp4`: Video with green silhouette edge-glow overlay for instant validation.
-   - `work/masks/subject/*.png`: Lossless per-frame alpha masks ready for your NLE editor (Premiere, DaVinci Resolve, Final Cut).
-
----
-
-## 🛠️ Requirements & Prerequisites
-
-- **Node.js**: v18.0 or newer
-- **Python**: 3.10 or newer (with `numpy`)
-- **FFmpeg**: Installed and available in PATH (with `prores_ks` support for ProRes 4444 transparent renders)
-- **Playwright**: Installed via `setup.sh` / `setup.ps1` (`npx playwright install chromium`)
-- **GPU (Optional)**: CUDA-enabled NVIDIA GPU or Apple Silicon for fast SAM 2 rotoscoping.
-
----
-
-## 👨‍💻 Creator & Author
+## 👤 Creator & Author
 
 **Rumel Ahmed**
-- GitHub: [@mrrajrumel](https://github.com/mrrajrumel)
-- Repository: [https://github.com/mrrajrumel/motion-skill](https://github.com/mrrajrumel/motion-skill)
-
-Feel free to open issues, submit pull requests, or share videos produced with this toolkit!
+- **GitHub**: [@mrrajrumel](https://github.com/mrrajrumel)
+- **Repository**: [https://github.com/mrrajrumel/motion-skill](https://github.com/mrrajrumel/motion-skill)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).  
 Embedded Geist fonts are licensed under the [SIL Open Font License 1.1](engine/fonts/OFL-Geist.txt).

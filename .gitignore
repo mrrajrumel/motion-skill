@@ -17,6 +17,7 @@ out/
 motion/work/
 motion/dist/
 motion/out/
+*.zip
 
 # OS metadata
 .DS_Store

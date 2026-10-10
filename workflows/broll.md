@@ -1,14 +1,18 @@
 
-# Motion B-roll
+# Motion Graphics & B-roll
 
-You make motion-graphic clips for a creator's video. Every clip is **one shape that never cuts**: it morphs its size, corners and colour from state to state while its content swaps with a short blur. A cursor drives the changes with real clicks and drags, and every change lands on a spoken word.
+You make motion-graphic clips and videos. Every clip is **one shape that never cuts**: it morphs its size, corners and colour from state to state while its content swaps with a short blur. A cursor drives the changes with real clicks and drags, and every change lands on a spoken word or planned beat.
 
-The output is a set of clips the creator drops into their editor. You also give them a preview render of their video with the clips cut in, and two HTML pages: one to step through the clips, one to compare before and after.
+Two modes are supported:
+1. **Video B-Roll Mode**: Adding cutaways and transparent overlay panels to an existing talking-head video timed to an SRT transcript.
+2. **Standalone Motion Video Mode**: Generating a complete standalone motion graphic video (product explainer, SaaS feature showcase, UI walkthrough) directly from a script, prompt, or voiceover without needing source video footage.
+
+The output is a set of clips the creator can drop into their editor (or concatenated into a final standalone video), plus preview renders and HTML review pages.
 
 Everything you need is in this skill folder:
 
 - `engine/`: the motion engine (`motion.js`), the page shell (`base.css`), `build.py` (clip → self-contained HTML), `render.js` (frame-by-frame render with motion blur), `beats.js` (contact sheets of stills), fonts (Geist, OFL).
-- `scripts/`: `setup.sh`, `inspect_video.py`, `words.py`, `composite.py`, `make_pages.py`.
+- `scripts/`: `setup.sh`, `setup.ps1`, `inspect_video.py`, `words.py`, `composite.py`, `make_pages.py`.
 - `reference/engine-api.md`: how to write a clip. **Read it before writing your first clip.**
 - `examples/opus-aoe2/`: six finished clips for a real 54-second video. Use them as the quality bar and as starting points.
 
@@ -26,22 +30,24 @@ powershell -ExecutionPolicy Bypass -File $SKILL/scripts/setup.ps1 ./motion
 
 This checks for Node, Python 3 and ffmpeg, and installs Playwright + Chromium into `motion/node_modules`. Run every engine script with `NODE_PATH=./motion/node_modules` (or `$env:NODE_PATH="./motion/node_modules"` in PowerShell).
 
-## 2. Interview
+## 2. Interview & Requirement Gathering
 
-Use the AskUserQuestion tool; keep it to one round. You need:
+Keep it to one concise round. You need:
 
-- **The video.** A path. Copy or reference it as `motion/work/source.*`.
-- **The transcript.** An SRT or VTT with timestamps is best. With plain text only, get word timestamps from the audio (`pip install faster-whisper`) or ask for an SRT.
-- **Density:**
+- **Mode:**
+  - **Video B-Roll:** Needs a source video path (`motion/work/source.*`) and transcript (`transcript.srt` or text).
+  - **Standalone Motion Video:** Needs only a script, outline, or concept prompt (and desired duration/aspect ratio, e.g., 16:9 1920x1080 or 9:16 1080x1920 for Shorts/Reels).
+- **Density / Pacing:**
   - Light: 2–4 clips per minute, only the strongest moments.
   - Medium (default): 4–7 per minute.
-  - Heavy: most lines covered, with short gaps of face.
-- **Look:**
-  - The default palette: warm gray canvas, black and white components, one orange accent.
-  - Or their brand: colours, and optionally a font. Ask them to drop a logo, screenshots or brand colours into `motion/inputs/`, and read those.
-- **Anything to avoid or include.** Lines to leave on their face, real numbers or names to show, product screenshots to recreate.
+  - Heavy: most lines covered, continuous visual flow.
+- **Look & Branding:**
+  - Default palette: warm studio canvas (`#E9E7E2`), ink (`#0B0B0B`), crisp white components, orange accent (`#FF5A1F`).
+  - Or custom brand: colors, logo, and typography from the user.
+- **Key Elements:**
+  - Real products, files, terminals, or numbers to display versus illustrative items.
 
-Skip any question the user already answered.
+Skip any question the user already answered in their prompt.
 
 ## 3. Inspect the footage
 
