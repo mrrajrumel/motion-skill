@@ -1,6 +1,6 @@
 ---
 name: motion
-description: Professional motion-graphics & video toolkit for Claude. Three core capabilities: (1) Standalone Motion Graphic Videos - generate continuous one-shape morphing explainer, product, and UI demo videos from a prompt or script. (2) Video B-roll - turn a talking-head video and transcript into continuous single-shape motion-graphic cutaways and transparent PiP overlay panels timed to the speaker's words. (3) Local Object Separation - isolate a person, product or hand locally with SAM 2, outputting a green-highlight preview video and lossless per-frame alpha masks. Supports commands like /motion, /broll, /separate.
+description: Professional motion-graphics & video toolkit for Claude. Three core capabilities: (1) Standalone Motion Graphic Videos - generate continuous one-shape morphing explainer, product, and UI demo videos from a prompt or script. (2) Video B-roll - turn a talking-head video and transcript into continuous single-shape motion-graphic cutaways and transparent PiP overlay panels timed to the speaker's words. (3) Local Object Separation - isolate a person, product or hand locally with SAM 2, outputting a green-highlight preview video and lossless per-frame alpha masks. Invoke via /motion in Claude Code or via natural language in Claude.ai.
 ---
 
 # Motion
@@ -11,11 +11,13 @@ Professional motion graphics and video editing skill for Claude.ai and Claude Co
 
 ## Quick Command Dispatch
 
-| Command / User Intent | Description | Workflow File |
+In Claude Code, invoke this skill using the registered `/motion` command. In Claude.ai Projects, you can use conversational prompts:
+
+| Intent / Prompt | Description | Workflow File |
 |---|---|---|
 | `/motion` or "Make motion video" | Create standalone 60fps motion graphic videos (explainers, SaaS UI demos, product highlights) from a script or prompt | `$SKILL/workflows/broll.md` (Standalone mode) |
-| `/broll` or "Add B-roll to video" | Generate motion-graphic cutaways or transparent overlay panels synchronized to a talking-head video & transcript | `$SKILL/workflows/broll.md` (B-roll mode) |
-| `/separate` or "Rotoscope / isolate subject" | Locally isolate a person, hand, or product with SAM 2 (GPU/CPU auto-detected, 100% private) | `$SKILL/workflows/object-separation.md` |
+| `/motion b-roll` or "Add B-roll to video" | Generate motion-graphic cutaways or transparent overlay panels synchronized to a talking-head video & transcript | `$SKILL/workflows/broll.md` (B-roll mode) |
+| `/motion separate` or "Rotoscope / isolate subject" | Locally isolate a person, hand, or product with SAM 2 (GPU/CPU auto-detected, 100% private) | `$SKILL/workflows/object-separation.md` |
 
 If the request combines workflows (for example, isolate a product with SAM 2, then build motion B-roll around it), run object separation first. Its per-frame alpha masks stay in `work/masks/subject/` so the motion engine can use them directly.
 
